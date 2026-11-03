@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://goldenamaan.github.io/mineroam-website/</loc></url>
-  <url><loc>https://goldenamaan.github.io/mineroam-website/docs/</loc></url>
-  <url><loc>https://goldenamaan.github.io/mineroam-website/docs/install/</loc></url>
-  <url><loc>https://goldenamaan.github.io/mineroam-website/docs/voting/</loc></url>
-  <url><loc>https://goldenamaan.github.io/mineroam-website/docs/commands/</loc></url>
-  <url><loc>https://goldenamaan.github.io/mineroam-website/docs/troubleshooting/</loc></url>
-  <url><loc>https://goldenamaan.github.io/mineroam-website/license/</loc></url>
-  <url><loc>https://goldenamaan.github.io/mineroam-website/rules/</loc></url>
+  <url><loc>https://mineroam.com/</loc></url>
+  <url><loc>https://mineroam.com/docs/</loc></url>
+  <url><loc>https://mineroam.com/docs/install/</loc></url>
+  <url><loc>https://mineroam.com/docs/voting/</loc></url>
+  <url><loc>https://mineroam.com/docs/commands/</loc></url>
+  <url><loc>https://mineroam.com/docs/troubleshooting/</loc></url>
+  <url><loc>https://mineroam.com/license/</loc></url>
+  <url><loc>https://mineroam.com/rules/</loc></url>
 </urlset>

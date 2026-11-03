@@ -1,7 +1,5 @@
 # Mineroam website
 
-Static website hosted on GitHub Pages.
+https://mineroam.com/
 
-https://goldenamaan.github.io/mineroam-website/
-
-Pages source: main branch, repository root. No build step required.
+Static website hosted on GitHub Pages. Pages source: main branch, repository root. No build step required.
