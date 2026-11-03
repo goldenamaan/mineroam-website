@@ -1,0 +1,23 @@
+MINEROAM LINK — USER GUIDE
+Version 2.1.14 | 3 November 2026
+
+Mineroam is an in-game Minecraft server list with server discovery and voting.
+Servers are hosted by their own owners. Link adds your server to Mineroam so
+players can find it, vote for it and join it from the Mineroam lobby.
+
+The server browser is in the lobby at play.mineroam.com. On a linked server,
+players can use /mineroam to return there or /mineroam join <server> to travel
+directly to another available listing. Your server remains independently run.
+
+CONTENTS
+1. Installation and registration
+2. Optional vote rewards
+3. Commands and permissions
+4. Troubleshooting and updates
+
+Read the installation guide first. Vote rewards are optional: a registered
+listing can receive votes without NuVotifier or a rewards plugin.
+
+This guide describes the supplied 2.1.14 build. Newer Minecraft releases should
+be checked before a production upgrade; it is not a claim that every version
+has been tested with live players.

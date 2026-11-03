@@ -1,0 +1,42 @@
+Mineroam Link Proprietary Licence
+Version 1.5 — 3 November 2026
+
+Copyright © 2026 Mineroam. All rights reserved.
+
+1. Using Mineroam Link
+
+Mineroam Link is free to download and use for connecting Minecraft servers to the official Mineroam network. This includes personal, community and commercial servers. You can run a monetised Minecraft server without paying for a Mineroam Link licence.
+
+You may install the official plugin, use its supported settings and keep copies needed for your server or backups.
+
+2. What you cannot do
+
+Without written permission from Mineroam, you may not:
+
+- Sell, republish or redistribute the plugin.
+- Modify, patch or release altered versions of the plugin.
+- Reuse its protected code in another project.
+- Remove copyright or branding notices from the plugin.
+- Use the plugin to operate or connect to an unauthorised alternative Mineroam network.
+- Bypass its registration or security features.
+
+These limits do not override rights you have under applicable law.
+
+3. Network rules and moderation
+
+This licence only covers the Mineroam Link plugin. Network access, player and server bans, suspensions, appeals and other moderation decisions are handled separately under the Mineroam Network Rules at https://goldenamaan.github.io/mineroam-website/rules, at the discretion of authorised Mineroam staff.
+
+4. Ownership and updates
+
+Mineroam Link and its original branding remain the property of their respective owners. Mineroam may update the plugin or stop supporting older versions. Third-party software included with the plugin is subject to its own licence terms.
+
+If you break this licence, Mineroam may end your permission to use the plugin. You must then stop using it and remove copies that you are no longer permitted to keep.
+
+5. No guarantees
+
+Mineroam Link is provided free of charge and "as is". We cannot promise that it will always work, remain compatible or be available without interruption. To the extent the law allows, Mineroam is not responsible for problems or losses caused by using the plugin. Nothing here takes away rights or protections that the law does not allow us to exclude.
+
+This licence is governed by the laws of England and Wales, subject to any mandatory rules that apply elsewhere.
+
+For permission requests, visit https://mineroam.com.
+Official licence page: https://goldenamaan.github.io/mineroam-website/license

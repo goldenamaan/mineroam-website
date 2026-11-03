@@ -1,0 +1,111 @@
+4. TROUBLESHOOTING AND UPDATES
+
+START HERE
+Run /mineroam status, then /mineroam doctor. Read the exact message and check
+the server/proxy console. Do not repeatedly delete the registration file.
+
+PLUGIN DOES NOT LOAD
+Check that you installed the correct JAR, your software meets the requirements,
+and your Java runtime matches the server software. Remove duplicate Link JARs.
+Paper needs the native transfer API; the Minecraft version alone is not enough
+if you are using unsupported server software. Check the first startup error.
+
+NO PERMISSION
+Grant the node for the command from the permissions guide. On Velocity this
+must be a proxy permission, not just a backend server permission. Register in
+game, not from the console.
+
+MINEROAM UNAVAILABLE / DISCONNECTED
+Check your server's internet/DNS access and hosting restrictions. Link retries
+automatically. An outage does not require a new registration. New registration
+requires Mineroam to be reachable. Saved files do not override the current
+registration decision.
+
+REGISTRATION PAUSED
+Read the displayed message. Wait for reopening or request a grant from Mineroam
+staff. With a grant, repeat the registration command using the same player
+account, name and address, followed by the code. A grant still needs the normal
+local registration permission and cannot bypass restrictions. A replacement
+or revoked code invalidates the old code.
+
+NAME TAKEN / NAME LOCKED / WRONG ADDRESS
+Names are unique, and some names or endpoints may be blocked. Choose an allowed
+name or contact Mineroam staff about an existing listing. Only use reregister
+when your status permits it. If staff rename your listing, Link recovers the
+assigned name automatically and keeps its listing settings and votes.
+
+OWNERSHIP VERIFICATION FAILED
+Use the public game host and its actual game port, with enable-status=true on
+Paper. For a network, register the proxy address and install Link on the proxy.
+Check that the temporary verification marker reaches status requests; another
+MOTD/status plugin may overwrite it. A custom DNS player address may depend on
+an SRV record: enter its actual game port explicitly in the registration.
+
+SUSPENDED / BANNED / REGISTRATION BLOCKED
+Contact Mineroam staff or follow the relevant appeal instructions. Do not try
+to clear a restriction by removing files or changing names. Network player bans
+also prevent registration. A separate account registration block can prevent
+new listings without banning that player from the lobby.
+
+LISTING MISSING FROM THE BROWSER
+Check that Link is connected and maintenance is off. Offline, restricted or
+maintenance listings are hidden. A reserved listing is not a connected Link
+listing until successfully claimed. Use /mineroam status to confirm the state.
+
+TRANSFER FAILS
+Enable incoming transfers on the destination. Check the destination's public
+host/port and client version compatibility. A transfer does not translate
+protocols. An unavailable/full/restricted listing cannot be joined through
+Mineroam. Link must be connected for its network commands and lobby return.
+
+VOTING: CONNECTION REFUSED
+Usually no listener accepted the connection at the configured public host/port.
+Check the allocation in your hosting panel AND NuVotifier's actual listening
+port. Restart NuVotifier after changes. Check its console for binding errors,
+wrong address, duplicate ports or another process occupying the port. Ask your
+host to confirm the externally reachable TCP address/port. Changing a token or
+public key will not fix a refused TCP connection.
+
+VOTING: TIMEOUT
+Check firewall rules, the host/IP and externally reachable TCP allocation.
+Confirm the listener is reachable from outside your hosting network. A game
+connection working does not prove the separate voting port is reachable.
+
+VOTING: AUTHENTICATION OR PUBLIC KEY ERROR
+Match protocol v2 to a NuVotifier token, or v1 to rsa/public.key. Check for
+missing characters and accidental spaces. Never use rsa/private.key. Check
+whether NuVotifier allows v1 when using it. Run voting reload after edits.
+Do not share your token, registration file or grant code in a help screenshot.
+
+VOTING: SETTINGS SAVED BUT NO REWARDS
+Saved settings are not a connection test. Run voting test once and read both
+NuVotifier and reward-plugin logs. v2 acceptance confirms the notification,
+not that a reward was issued; v1 has no delivery acknowledgement. Check reward
+rules, the service name Mineroam and offline reward handling. Test commands can
+give real rewards, so avoid repeating them without checking the result.
+
+MESSAGE/FIND COMMANDS DO NOT WORK
+Check connection, feature availability and player permissions. Privacy, ignores,
+a network ban or mute may limit an action. On Velocity, verify permissions on
+the proxy. Another plugin may claim the same command; /mrmsg is the explicit
+Mineroam message command. Your server's existing /vote is unaffected by Link.
+
+FILES AND UPDATING
+Paper uses config.yml and registration.yml; Velocity uses config.json and
+registration.json. Paper may also create features.json as a feature cache.
+Both generate license.txt. Registration files are private runtime credentials;
+back them up securely and do not publish or copy them into another live server.
+Vote tokens and unspent grant codes must also stay private. A public RSA key
+is not a private key, but do not upload an entire NuVotifier folder for support.
+
+To update: stop the server/proxy, back up its Link data folder, replace the old
+JAR with the new MineroamLink.jar, and start it again. Keep one Link JAR and
+retain your data folder. Avoid hot plugin reloaders. The bundled licence is
+written to license.txt on startup and refreshed if its contents differ.
+
+For help, provide the Link version, Paper/Velocity version, exact error and
+relevant redacted log lines. Never send credentials or an unredacted runtime
+registration file.
+
+Rules: https://goldenamaan.github.io/mineroam-website/rules
+Licence: https://goldenamaan.github.io/mineroam-website/license

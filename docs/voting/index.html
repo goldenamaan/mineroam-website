@@ -1,0 +1,43 @@
+<!doctype html>
+
+<html lang="en-GB"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><meta content="#080d15" name="theme-color"/><meta content="index,follow" name="robots"/><meta content="Mineroam Link voting rewards guide." name="description"/><meta content="website" property="og:type"/><meta content="Voting rewards | Mineroam" property="og:title"/><meta content="Mineroam Link voting rewards guide." property="og:description"/><meta content="https://goldenamaan.github.io/mineroam-website/assets/mineroam-logo.png" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><link href="https://goldenamaan.github.io/mineroam-website/docs/voting/" rel="canonical"/><link href="../../assets/favicon.png" rel="icon" type="image/png"/><link href="../../assets/site.css" rel="stylesheet"/><script defer="" src="../../assets/site.js"></script><title>Voting rewards | Mineroam</title></head><body>
+<header class="header"><div class="container header-inner"><a aria-label="Mineroam home" class="brand" href="../../index.html"><img alt="Mineroam" height="76" src="../../assets/mineroam-logo.webp" width="227"/></a><button aria-controls="site-nav" aria-expanded="false" aria-label="Toggle navigation" class="menu-toggle" data-menu-toggle="" type="button">Menu</button><nav aria-label="Main navigation" class="top-nav" data-nav="" id="site-nav"><a href="../../index.html">Home</a><a aria-current="page" href="../index.html">Documentation</a><a href="../../rules/index.html">Rules</a><a class="nav-join" href="../../index.html#play">Join the server</a></nav></div></header>
+<section class="page-heading"><div class="container"><div class="crumbs"><a href="../../index.html">MINEROAM</a><span>/</span><a href="../index.html">DOCUMENTATION</a><span>/</span><span>VOTING REWARDS</span></div><h1>Voting rewards</h1><p>Mineroam Link user guide</p><div class="page-meta">VERSION 2.1.14 · 3 NOVEMBER 2026</div></div></section><main class="container doc-layout"><aside aria-label="Documentation sections" class="doc-sidebar"><h2>Contents</h2><a href="../index.html">All documentation</a><div class="separate"></div><a class="" href="../install/index.html">Install &amp; register</a><a class="active" href="index.html">Voting rewards</a><a class="" href="../commands/index.html">Commands</a><a class="" href="../troubleshooting/index.html">Troubleshooting</a><div class="separate"></div><a class="download" download="" href="../../downloads/02-Voting-Setup.txt">Download as .txt ↗</a></aside><article class="doc-content"><div class="info-box"><strong>Optional:</strong> You do not need NuVotifier to receive votes. It is only needed to send reward notifications.</div><p>Voting and rewards are separate. A registered listing can receive votes without any reward setup. Players vote in the Mineroam lobby. They can vote for several servers each day, but only once per particular server every 24 hours.</p>
+<p>To give in-game rewards, install NuVotifier and a compatible rewards plugin. NuVotifier receives the notification; your rewards plugin decides what to give. Reward delivery is not a guarantee that a rewards plugin issued a reward.</p>
+<h2 id="set-up-the-receiving-port-first">Set Up The Receiving Port First</h2>
+<ol><li>Allocate an additional TCP port in your hosting panel.</li><li>Set NuVotifier's listening port to that exact allocation. Configure its bind address as required by your host; on many hosts it is 0.0.0.0.</li><li>Restart the server or proxy running NuVotifier. Check its startup log for a successful bind, not an address-in-use or permission error.</li><li>Use the public host/IP and externally reachable port for that listener in Link. This is separate from your Minecraft game port. A port appearing in a hosting panel does not itself start a listener on it.</li></ol>
+<p>For a Velocity network, choose where NuVotifier and rewards will run and follow those plugins' forwarding instructions. Set Link's destination to the public NuVotifier listener you actually configured. Link does not install or configure NuVotifier forwarding for your backend servers.</p>
+<h2 id="choose-one-authentication-method">Choose One Authentication Method</h2>
+<p>v2: use a token from NuVotifier's config.yml. Use tokens.Mineroam if you created that entry; otherwise tokens.default. Paste its VALUE, not the word 'default' or 'Mineroam'. It must be at least 16 characters. Keep the token private.</p>
+<p>v1: use the contents of NuVotifier's rsa/public.key on one line. This build requires a 2048-bit RSA public key. NuVotifier must allow v1 connections. Never paste rsa/private.key into Link or send it to anyone.</p>
+<p>Tokens and RSA public keys are different. Do not paste a token into public-key or a public key into token. v2 is the straightforward choice for a new setup.</p>
+<h2 id="paper-example-token-v2">PAPER EXAMPLE — TOKEN / v2</h2>
+<p>Edit plugins/MineroamLink/config.yml:</p>
+<pre><code>voting:
+  host: 'myserver.example.com'
+  port: 28000
+  protocol: v2
+  token: 'REPLACE_WITH_YOUR_NUVOTIFIER_TOKEN'
+  public-key: ''</code></pre>
+<h2 id="velocity-example-token-v2">VELOCITY EXAMPLE — TOKEN / v2</h2>
+<p>Edit config.json in Link's proxy data folder:</p>
+<pre><code>{
+  "voting": {
+    "host": "myserver.example.com",
+    "port": 28000,
+    "protocol": "v2",
+    "token": "REPLACE_WITH_YOUR_NUVOTIFIER_TOKEN",
+    "public-key": ""
+  }
+}</code></pre>
+<p>These addresses and ports are examples. Replace them with YOUR listener's public host and allocated port. Do not include :port in host. JSON needs double quotes and no trailing comma; YAML uses spaces for indentation, not tabs.</p>
+<p>FOR v1 INSTEAD Set protocol to v1, leave token empty, and paste the complete contents of rsa/public.key into public-key. Keep that value on one line inside quotes. Use the same field names in either YAML or JSON.</p>
+<h2 id="apply-and-test">Apply And Test</h2>
+<p>With Link connected, run:</p><pre><code>/mineroam voting reload
+/mineroam voting status
+/mineroam voting test YourPlayerName</code></pre>
+<p>Reload reads your config, validates it and submits the reward notification settings to Mineroam. It does not change NuVotifier's own configuration. Status shows saved settings; it does not prove the listener is reachable. A test can give real rewards. Use an appropriate test account and check both NuVotifier's logs and your rewards plugin. Test votes do not increase the listing's Mineroam vote total or consume a player's normal vote cooldown.</p>
+<p>A v2 acknowledgement confirms notification acceptance. A v1 'sent' result is not a delivery acknowledgement. If notifications arrive but no reward appears, check your rewards plugin's configuration, offline handling and service name; the service name sent is Mineroam.</p>
+<h2 id="stop-reward-notifications">Stop Reward Notifications</h2>
+<pre><code>/mineroam voting disable</code></pre><p>This turns off the saved reward notifications. Players can still vote for the listing. The local config is retained; a later voting reload enables the saved settings again. There is no /mineroam voting setup command: setup is in the file. Your server's existing /vote command is left alone on Link servers.</p><div class="doc-pager"><a href="../../docs/install/index.html"><span>← PREVIOUS GUIDE</span><strong>Installation &amp; registration</strong></a><a class="next" href="../../docs/commands/index.html"><span>NEXT GUIDE →</span><strong>Commands &amp; permissions</strong></a></div></article></main>
+<footer class="footer"><div class="container footer-inner"><span>© 2026 Mineroam · Not affiliated with Mojang Studios or Microsoft.</span><nav aria-label="Footer"><a href="../index.html">Documentation</a><a href="../../rules/index.html">Network rules</a><a href="../../license/index.html">Licence</a></nav></div></footer></body></html>

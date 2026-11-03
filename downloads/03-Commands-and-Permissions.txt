@@ -1,0 +1,96 @@
+3. COMMANDS AND PERMISSIONS
+
+Use /mineroam or its alias /mr. /ml is not an alias in this build.
+<value> means required; [value] means optional. Do not type the brackets.
+Player commands run in game. Registration and re-registration also require an
+in-game player; the console can use the other applicable management commands.
+Availability depends on the enabled Mineroam features and connection status.
+
+PLAYER COMMANDS — BOTH PLATFORMS
+/mineroam                         Return to the Mineroam lobby.
+/mineroam join <server>           Join an available registered server.
+/find <player>                   Find a network player; click the join action.
+/random                          Join a random eligible server.
+/msg <player> <message>           Send a network message when enabled.
+/reply <message>                  Reply to the last conversation.
+/mrmsg <player> <message>         Explicit Mineroam message command.
+/ignore <player>                  Toggle ignoring an online player.
+/privacy find <on|off>            Allow/disallow normal network discovery.
+/privacy messages <on|off>        Allow/disallow normal incoming messages.
+/favourite <server>              Toggle a favourite server.
+/favourites                      List favourite servers.
+/recent                          List recently joined servers.
+
+Message aliases: /tell, /w, /whisper. Reply alias: /r.
+Favourite aliases: /favorite and /favorites.
+The ordinary /msg and /reply aliases are handled by Mineroam when its messaging
+feature is enabled. Explicitly namespaced commands belong to their own plugins;
+other plugins can still affect command priority. When messaging is disabled,
+those ordinary aliases are not used for Mineroam messaging.
+
+Privacy 'on' enables the named permission to find or message you; 'off' disables
+it for normal players. Authorised Mineroam staff can bypass privacy settings for
+moderation. Messages are gameplay communication, not confidential messaging;
+authorised Mineroam staff may review them. A network ban prevents /find and
+limits Mineroam messaging to players on your current listing. A network mute
+also limits messaging to your current listing but leaves /find subject to its
+normal privacy rules.
+
+There is no standalone Mineroam /join or browser/compass interface on Link.
+Use /mineroam join or return to the lobby to browse and vote. Players can
+only vote from the Mineroam Core lobby; Link has no player voting commands.
+Your server's existing /vote command is not replaced by Link.
+
+SERVER MANAGEMENT COMMANDS
+/mineroam register <name> <address[:port]> [grant-code]
+  Register this server; grant-code is only needed for an authorised exception
+  while registrations are paused.
+/mineroam reregister <name> <address[:port]> [grant-code]
+  Deliberately recover an eligible removed/expired/rejected registration when
+  status tells you to. This is not a way around a suspension or ban.
+/mineroam unregister
+  Remove this listing. Its name may become available. This is not a temporary
+  hide switch: use maintenance for that.
+/mineroam status
+  Show connection/registration status and any available restriction details.
+/mineroam doctor
+  Show status and setup checks.
+/mineroam description <text>
+  Set the browser description; maximum 160 characters.
+/mineroam icon <material>
+  Set the browser icon using an item material, for example DIAMOND.
+/mineroam maintenance <on|off>
+  Hide/unhide the listing from normal browser discovery and Mineroam joins.
+  This does not prevent people joining your game address directly.
+/mineroam reload
+  Reload local settings. To apply reward details, use voting reload below.
+/mineroam voting reload
+  Read and apply reward notification details from the config.
+/mineroam voting status
+  Show saved reward notification settings, with the credential hidden.
+/mineroam voting test <player>
+  Send a test notification. It may issue real rewards.
+/mineroam voting disable
+  Disable reward notifications without disabling votes for the listing.
+
+PLAYER COMMAND ACCESS
+All player commands listed above are available to everyone by default. They
+are not meant to be restricted through Mineroam Link permission nodes.
+Network-wide features can still be temporarily unavailable when disabled by
+Mineroam or when Link is disconnected.
+
+SERVER MANAGEMENT PERMISSIONS
+mineroam.link.register       register and reregister
+mineroam.link.unregister     unregister
+mineroam.link.status         status and doctor
+mineroam.link.listing        description and icon
+mineroam.link.maintenance    maintenance
+mineroam.link.voting         all voting management commands
+mineroam.link.reload         reload
+mineroam.link.admin          all management commands for this Link instance
+
+Paper management permissions default to operators. On Velocity, grant the
+relevant nodes through the proxy's permission provider; do not rely on backend
+permissions or operator status. The proxy console can manage its own Link.
+These permissions do not grant Mineroam network administration. Give individual
+nodes to staff who only need specific tasks rather than the full admin node.

@@ -1,0 +1,93 @@
+2. OPTIONAL VOTE REWARDS
+
+Voting and rewards are separate. A registered listing can receive votes without
+any reward setup. Players vote in the Mineroam lobby. They can vote for several
+servers each day, but only once per particular server every 24 hours.
+
+To give in-game rewards, install NuVotifier and a compatible rewards plugin.
+NuVotifier receives the notification; your rewards plugin decides what to give.
+Reward delivery is not a guarantee that a rewards plugin issued a reward.
+
+SET UP THE RECEIVING PORT FIRST
+1. Allocate an additional TCP port in your hosting panel.
+2. Set NuVotifier's listening port to that exact allocation. Configure its bind
+   address as required by your host; on many hosts it is 0.0.0.0.
+3. Restart the server or proxy running NuVotifier. Check its startup log for a
+   successful bind, not an address-in-use or permission error.
+4. Use the public host/IP and externally reachable port for that listener in
+   Link. This is separate from your Minecraft game port. A port appearing in a
+   hosting panel does not itself start a listener on it.
+
+For a Velocity network, choose where NuVotifier and rewards will run and follow
+those plugins' forwarding instructions. Set Link's destination to the public
+NuVotifier listener you actually configured. Link does not install or configure
+NuVotifier forwarding for your backend servers.
+
+CHOOSE ONE AUTHENTICATION METHOD
+v2: use a token from NuVotifier's config.yml. Use tokens.Mineroam if you created
+that entry; otherwise tokens.default. Paste its VALUE, not the word 'default'
+or 'Mineroam'. It must be at least 16 characters. Keep the token private.
+
+v1: use the contents of NuVotifier's rsa/public.key on one line. This build
+requires a 2048-bit RSA public key. NuVotifier must allow v1 connections.
+Never paste rsa/private.key into Link or send it to anyone.
+
+Tokens and RSA public keys are different. Do not paste a token into public-key
+or a public key into token. v2 is the straightforward choice for a new setup.
+
+PAPER EXAMPLE — TOKEN / v2
+Edit plugins/MineroamLink/config.yml:
+
+voting:
+  host: 'myserver.example.com'
+  port: 28000
+  protocol: v2
+  token: 'REPLACE_WITH_YOUR_NUVOTIFIER_TOKEN'
+  public-key: ''
+
+VELOCITY EXAMPLE — TOKEN / v2
+Edit config.json in Link's proxy data folder:
+
+{
+  "voting": {
+    "host": "myserver.example.com",
+    "port": 28000,
+    "protocol": "v2",
+    "token": "REPLACE_WITH_YOUR_NUVOTIFIER_TOKEN",
+    "public-key": ""
+  }
+}
+
+These addresses and ports are examples. Replace them with YOUR listener's
+public host and allocated port. Do not include :port in host. JSON needs double
+quotes and no trailing comma; YAML uses spaces for indentation, not tabs.
+
+FOR v1 INSTEAD
+Set protocol to v1, leave token empty, and paste the complete contents of
+rsa/public.key into public-key. Keep that value on one line inside quotes.
+Use the same field names in either YAML or JSON.
+
+APPLY AND TEST
+With Link connected, run:
+  /mineroam voting reload
+  /mineroam voting status
+  /mineroam voting test YourPlayerName
+
+Reload reads your config, validates it and submits the reward notification
+settings to Mineroam. It does not change NuVotifier's own configuration.
+Status shows saved settings; it does not prove the listener is reachable.
+A test can give real rewards. Use an appropriate test account and check both
+NuVotifier's logs and your rewards plugin. Test votes do not increase the
+listing's Mineroam vote total or consume a player's normal vote cooldown.
+
+A v2 acknowledgement confirms notification acceptance. A v1 'sent' result is
+not a delivery acknowledgement. If notifications arrive but no reward appears,
+check your rewards plugin's configuration, offline handling and service name;
+the service name sent is Mineroam.
+
+STOP REWARD NOTIFICATIONS
+  /mineroam voting disable
+This turns off the saved reward notifications. Players can still vote for the
+listing. The local config is retained; a later voting reload enables the saved
+settings again. There is no /mineroam voting setup command: setup is in the file.
+Your server's existing /vote command is left alone on Link servers.

@@ -1,0 +1,97 @@
+1. INSTALLATION AND REGISTRATION
+
+REQUIREMENTS
+- Paper 1.20.6 or newer with native player transfers, or Velocity with the 3.3
+  transfer API or newer. The same MineroamLink.jar supports both platforms.
+- Java 21 for Paper 1.20.6 and 1.21.x. Follow your server software's runtime
+  requirements for later releases and for Velocity.
+- A public Minecraft game address that players can reach.
+- Online-mode enabled on the Paper server, or on the Velocity proxy.
+- A compatible Java client and destination version for transfers. Use Minecraft
+  Java 1.20.6 or newer as the supported minimum for your players.
+
+This release does not support BungeeCord, Waterfall, Folia or Bedrock/Geyser
+transfers. Velocity is the supported proxy platform; Link uses its native
+transfer API. There is no BungeeCord/Waterfall implementation in this build.
+Link does not translate Minecraft protocol versions.
+
+PAPER INSTALLATION
+1. Stop the server and put MineroamLink.jar in plugins/.
+2. In server.properties, set:
+   online-mode=true
+   enable-status=true
+   accepts-transfers=true
+3. Start the server. Check the console for startup errors.
+4. The plugin creates plugins/MineroamLink/, including config.yml and
+   license.txt. Registration details are saved after you register.
+5. Join your server and register as an operator or with
+   mineroam.link.register.
+
+VELOCITY INSTALLATION
+1. Stop the proxy and put MineroamLink.jar in the proxy's plugins/ folder.
+2. In velocity.toml, enable online-mode and set accepts-transfers=true under
+   the [advanced] section. Restart the proxy after changing these settings.
+3. Link creates config.json, registration.json when registering, and license.txt
+   in its proxy plugin data folder. It uses JSON on Velocity, not config.yml.
+4. Give the registering player mineroam.link.register through your proxy
+   permission provider, such as LuckPerms installed on Velocity.
+5. Join through the proxy and register the proxy's PUBLIC game address.
+
+Install Link on the proxy only for a Velocity network. One proxy is one listing;
+backend server switches do not create extra listings. Keep your existing secure
+proxy forwarding setup. Do not enable backend online-mode merely because the
+standalone Paper instructions say online-mode=true; the proxy authenticates
+players in a properly configured Velocity network.
+
+REGISTER YOUR SERVER
+Run this in game on the server or proxy being registered:
+  /mineroam register <name> <address[:port]>
+
+Examples:
+  /mineroam register MySurvival play.example.com
+  /mineroam register MySurvival play.example.com:25570
+
+If you leave out the game port, 25565 is used. Use the actual numeric public game
+port if your host allocated another one, even if a custom DNS address normally
+lets players connect without typing it. Enter an address, not an https:// URL.
+Use the public player address, not localhost, a private network address or a
+NuVotifier port. Names contain 1–32 letters, numbers, underscores or hyphens and
+are normalised to lower case. Names and game endpoints must be available.
+
+Check:
+  /mineroam status
+
+Registration is automatic once its checks pass while registrations are open.
+A saved local file alone does not mean the listing is connected. Link checks its
+registration with Mineroam and reports restrictions or recovery instructions.
+It may briefly add a verification marker to the status MOTD during setup. Keep
+status enabled and make sure a MOTD plugin is not removing that marker.
+
+By registering a server you agree to the Mineroam Network Rules:
+  https://goldenamaan.github.io/mineroam-website/rules
+
+WHEN REGISTRATIONS ARE PAUSED
+Mineroam displays its current registration message. Wait for registration to
+reopen, or ask Mineroam staff about a registration grant. If staff give your
+player account a grant code, use:
+  /mineroam register <name> <address[:port]> <grant-code>
+
+You still need local mineroam.link.register permission. The code is bound to
+your player account. Keep it private and only enter it on a server you trust;
+server operators can inspect commands run on their own server. A failed check
+does not use the grant. A successful new listing or claim of a reserved listing
+uses it once. A grant does not override bans, name/IP blocks or ownership checks,
+and does not give ongoing listing-edit permissions. Local Link permissions
+continue to control editing. Staff can revoke or replace unused grants.
+
+NETWORK ACCESS
+Your game port must already be reachable publicly. Link initiates its Mineroam
+connection; you do not need an additional inbound port just to install Link.
+If your host filters outgoing traffic, ask them to allow the official Mineroam
+connection. Optional NuVotifier rewards require their own reachable TCP port.
+
+When offline, disconnected, in maintenance or restricted, a listing may be
+hidden from the browser. Link reconnects automatically after temporary outages.
+A listing offline continuously for a year can expire. A successful reconnection
+resets that offline period. If it expires, follow the recovery instructions;
+your previous name is not guaranteed to remain available.

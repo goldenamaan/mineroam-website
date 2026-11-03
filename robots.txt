@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /rules/
+Sitemap: https://goldenamaan.github.io/mineroam-website/sitemap.xml

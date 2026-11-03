@@ -1,0 +1,7 @@
+(function(){
+  var menu=document.querySelector('[data-menu-toggle]');
+  var nav=document.querySelector('[data-nav]');
+  if(menu&&nav){menu.addEventListener('click',function(){var open=nav.classList.toggle('open');menu.setAttribute('aria-expanded',String(open));menu.textContent=open?'Close':'Menu';});}
+  function fallbackCopy(value){var a=document.createElement('textarea');a.value=value;a.setAttribute('readonly','');a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();var ok=false;try{ok=document.execCommand('copy');}catch(e){}a.remove();return ok;}
+  document.querySelectorAll('[data-copy-ip]').forEach(function(button){button.addEventListener('click',function(){var old=button.textContent;var value='play.mineroam.com';var complete=function(ok){button.textContent=ok?'Copied':'Select IP';button.setAttribute('aria-label',ok?'IP copied':'Copy the server address manually');setTimeout(function(){button.textContent=old;button.setAttribute('aria-label','Copy Mineroam server address');},1700);};if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(value).then(function(){complete(true);}).catch(function(){complete(fallbackCopy(value));});}else{complete(fallbackCopy(value));}});});
+})();
